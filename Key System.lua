@@ -1,5 +1,13 @@
 --Key System LIB
 
+local object = script.Parent
+object.AnchorPoint = Vector2.new(0.5, 0.5)
+object.Position = UDim2.new(0, -object.Size.X.Offset, 0.5, 0)
+
+wait(2)
+
+object:TweenPosition(UDim2.new(0.5, 0, 0.5, 0))
+
 if game.CoreGui:FindFirstChild("DarkHubLib") then
     game.CoreGui.DarkHubLib:Destroy()
 end
