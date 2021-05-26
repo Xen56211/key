@@ -1,13 +1,5 @@
 --Key System LIB
 
-local object = script.Parent
-object.AnchorPoint = Vector2.new(0.5, 0.5)
-object.Position = UDim2.new(0, -object.Size.X.Offset, 0.5, 0)
-
-wait(2)
-
-object:TweenPosition(UDim2.new(0.5, 0, 0.5, 0))
-
 if game.CoreGui:FindFirstChild("DarkHubLib") then
     game.CoreGui.DarkHubLib:Destroy()
 end
@@ -175,6 +167,15 @@ function DarkLib:Window()
 	MainFrameUICorner.CornerRadius = UDim.new(0, 11)
 	MainFrameUICorner.Name = "MainFrameUICorner"
 	MainFrameUICorner.Parent = MainFrame
+
+    UIPad_2.Name = "UI Pad"
+    UIPad_2.Parent = MainFrame
+    UIPad_2.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+    UIPad_2.BorderColor3 = Color3.fromRGB(27, 42, 53)
+    UIPad_2.Position = UDim2.new(0.0388656966, 0, 0.23495239, 0)
+    UIPad_2.Size = UDim2.new(0, 371, 0, 43)
+    UIPad_2.ZIndex = 500
+
 
 	Title.Name = "Title"
 	Title.Parent = MainFrame
