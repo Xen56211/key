@@ -1385,3 +1385,131 @@ function DarkLib:Window()
 			)
 			ItemHolder.CanvasSize = UDim2.new(0, 0, 0, ItemHolderUIList.AbsoluteContentSize.Y)
 		end
+
+		function Cont:Keybind(text, key, callback)
+			local Key = key.Name
+
+			local Bind = Instance.new("TextButton")
+			local BindUICorner = Instance.new("UICorner")
+			local Title = Instance.new("TextLabel")
+			local BindFrame = Instance.new("Frame")
+			local BindFrameUICorner = Instance.new("UICorner")
+			local BindLabel = Instance.new("TextLabel")
+
+			Bind.Name = "Bind"
+			Bind.Parent = ItemHolder
+			Bind.AnchorPoint = Vector2.new(0.5, 0.5)
+			Bind.BackgroundColor3 = Color3.fromRGB(39, 39, 39)
+			Bind.Position = UDim2.new(-0.436928689, 0, 0.696994126, 0)
+			Bind.Size = UDim2.new(0, 491, 0, 29)
+			Bind.AutoButtonColor = false
+			Bind.Font = Enum.Font.SciFi
+			Bind.Text = ""
+			Bind.TextColor3 = Color3.fromRGB(195, 195, 195)
+			Bind.TextSize = 14.000
+
+			BindUICorner.CornerRadius = UDim.new(0, 6)
+			BindUICorner.Name = "BindUICorner"
+			BindUICorner.Parent = Bind
+
+			Title.Name = "Title"
+			Title.Parent = Bind
+			Title.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+			Title.BackgroundTransparency = 1.000
+			Title.Position = UDim2.new(0.0244399179, 0, 0.068965517, 0)
+			Title.Size = UDim2.new(0, 1, 0, 24)
+			Title.Font = Enum.Font.SciFi
+			Title.TextColor3 = Color3.fromRGB(195, 195, 195)
+			Title.TextSize = 14.000
+			Title.TextXAlignment = Enum.TextXAlignment.Left
+			Title.Text = text
+
+			BindFrame.Name = "BindFrame"
+			BindFrame.Parent = Bind
+			BindFrame.BackgroundColor3 = Color3.fromRGB(33, 33, 33)
+			BindFrame.Position = UDim2.new(0.775967538, 0, 0.172413796, 0)
+			BindFrame.Size = UDim2.new(0, 103, 0, 19)
+
+			BindFrameUICorner.CornerRadius = UDim.new(0, 6)
+			BindFrameUICorner.Name = "BindFrameUICorner"
+			BindFrameUICorner.Parent = BindFrame
+
+			BindLabel.Name = "BindLabel"
+			BindLabel.Parent = BindFrame
+			BindLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+			BindLabel.BackgroundTransparency = 1.000
+			BindLabel.Size = UDim2.new(0, 102, 0, 20)
+			BindLabel.Font = Enum.Font.SciFi
+			BindLabel.Text = Key
+			BindLabel.TextColor3 = Color3.fromRGB(195, 195, 195)
+			BindLabel.TextSize = 13.000
+
+			Bind.MouseEnter:Connect(
+				function()
+					TweenService:Create(
+						Bind,
+						TweenInfo.new(.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
+						{BackgroundColor3 = Color3.fromRGB(44, 44, 44)}
+					):Play()
+				end
+			)
+
+			Bind.MouseLeave:Connect(
+				function()
+					TweenService:Create(
+						Bind,
+						TweenInfo.new(.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
+						{BackgroundColor3 = Color3.fromRGB(39, 39, 39)}
+					):Play()
+				end
+			)
+
+			Bind.MouseButton1Click:connect(
+				function(e)
+					BindLabel.Text = "..."
+					local a, b = game:GetService("UserInputService").InputBegan:wait()
+					if a.KeyCode.Name ~= "Unknown" then
+						BindLabel.Text = a.KeyCode.Name
+						Key = a.KeyCode.Name
+					end
+				end
+			)
+
+			game:GetService("UserInputService").InputBegan:connect(
+			function(current, pressed)
+				if not pressed then
+					if current.KeyCode.Name == Key then
+						pcall(callback)
+					end
+				end
+			end
+			)
+			ItemHolder.CanvasSize = UDim2.new(0, 0, 0, ItemHolderUIList.AbsoluteContentSize.Y)
+		end
+
+		function Cont:Label(text)
+			local Label = Instance.new("TextButton")
+			local LabelUICorner = Instance.new("UICorner")
+
+			Label.Name = "Label"
+			Label.Parent = ItemHolder
+			Label.BackgroundColor3 = Color3.fromRGB(39, 39, 39)
+			Label.Position = UDim2.new(0, 0, 0.174999997, 0)
+			Label.Size = UDim2.new(0, 491, 0, 29)
+			Label.AutoButtonColor = false
+			Label.Font = Enum.Font.SciFi
+			Label.TextColor3 = Color3.fromRGB(195, 195, 195)
+			Label.TextSize = 14.000
+			Label.Text = text
+			Label.ClipsDescendants = true
+
+			LabelUICorner.CornerRadius = UDim.new(0, 6)
+			LabelUICorner.Name = "LabelUICorner"
+			LabelUICorner.Parent = Label
+			ItemHolder.CanvasSize = UDim2.new(0, 0, 0, ItemHolderUIList.AbsoluteContentSize.Y)
+		end
+		return Cont
+	end
+	return Win
+end
+return DarkLib
